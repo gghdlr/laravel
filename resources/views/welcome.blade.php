@@ -1,3 +1,7 @@
+<!--php artisan serve --port 3000
+php artisan make:controller AuthController
+php artisan migrate-создать бдд относительно того что в migrations
+-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

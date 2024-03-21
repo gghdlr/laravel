@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
+//Comment
+Route::post('comments', [CommentController::class, 'store']);
+Route::get('comments/{comment}/edit', [CommentController::class, 'edit']);
+Route::put('comments/{comment}', [CommentController::class, 'update']);
+Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
+//Article
+
+Route::resource('article', ArticleController::class);
+
+//Auth
+
+Route::get('signin', [AuthController::class, 'signin']);
+Route::post('registr', [AuthController::class, 'registr']);
+
+
+// Route::get('/', function () {
+//     return view('layout');
+// });
+
+Route::get('/full-img/{img}', [MainController::class, 'show']);
+
+Route::get('/', [MainController::class, 'index']);
+
+Route::get('/contacts', function(){
+    $contacts = [
+       'Univer' => 'Polytech', 
+       'phone' => '89231',
+       'email' => 'alex@mail.ru'
+    ];
+    return view('main.contact', ['contacts'=>$contacts]);
 });
