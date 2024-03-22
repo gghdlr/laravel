@@ -31,11 +31,14 @@
   <div class = "card-body">
     <h5 class = "card-title">{{$comment->title}}</h5>
     <p class = "card-text">{{$comment->text}}</p>
+    @can('comment', $comment)
     <div style = "display: flex;"><a href="/comments/{{$comment->id}}/edit" class="btn btn-primary">Edit comment</a>
     <form action = "/comments/{{$comment->id}}" method="post">
     @method("DELETE")
     @csrf
-        <button type="submit" class="btn btn-danger" style ="margin-left: 10px;">Delete comment</button></form></div>
+        <button type="submit" class="btn btn-danger" style ="margin-left: 10px;">Delete comment</button></form>
+      </div>
+      @endcan
   </div>
 </div>
 @endforeach
