@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
+    {   
+        $this->call(UserSeeder::calss);
          Article::factory(10)->has(Comment::factory(3))->create();
         // \App\Models\User::factory(10)->create();
 
