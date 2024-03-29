@@ -17,14 +17,20 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Article::class => ArticleControllerPolicy::class
     ];
 
     /**
      * Register any authentication / authorization services.
      */
     public function boot(): void
-    {
+    {   
+        Gate::before(function(User $user) {
+            if ($user->role == 'moderator') {
+                return true;
+            }
+        });
+
         Gate::define('comment', function (User $user, Comment $comment){
             return ($user ->id == $comment -> user_id) ? 
             Response::allow() :
